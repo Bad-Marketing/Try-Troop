@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TryTroop — 2026 Amazon Recovery &amp; Growth Strategy</title>
+<link rel="icon" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;700;800;900&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --graphite:#181B1F; --bone:#F2F4F6; --orange:#F67A1C; --blue:#1273C8;
+    --char:#21252B; --border:#2B2F36; --muted:#8A9099;
+    --green:#3FAE6A; --amber:#D9A62E;
+    --font-display:'Gabarito',system-ui,sans-serif;
+    --font-body:'Figtree',-apple-system,'Helvetica Neue',sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-body);background:var(--graphite);color:var(--bone);overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--char);border-bottom:2px solid var(--orange);height:60px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;}
+  .nav-brand{font-family:var(--font-mono);font-size:1rem;font-weight:600;letter-spacing:.08em;color:var(--bone);white-space:nowrap;text-transform:uppercase;}
+  .nav-brand .colon{color:var(--orange);}
+  .nav-links{display:none;}
+  .hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:4px;width:36px;height:36px;}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--bone);transition:all .3s;}
+
+  /* NAV DROPDOWN */
+  .nav-mobile{display:none;position:fixed;top:60px;left:0;right:0;z-index:99;background:var(--char);border-bottom:2px solid var(--orange);max-height:calc(100vh - 60px);overflow-y:auto;}
+  .nav-mobile.open{display:block;}
+  .nav-mobile a{display:block;padding:.8rem 1.5rem;font-family:var(--font-mono);font-size:.85rem;font-weight:600;letter-spacing:.08em;color:var(--muted);text-decoration:none;text-transform:uppercase;border-bottom:1px solid var(--border);transition:color .2s;}
+  .nav-mobile a:hover{color:var(--orange);}
+
+  /* PROGRESS BAR */
+  #progress{position:fixed;top:60px;left:0;right:0;z-index:99;height:3px;background:var(--orange);transform-origin:left;transform:scaleX(0);transition:transform .1s linear;}
+
+  /* COVER */
+  #cover{min-height:100vh;background:var(--graphite);display:grid;place-items:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+  #cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(246,122,28,0.10) 0%,transparent 60%);pointer-events:none;}
+  .cover-inner{max-width:1200px;width:100%;}
+  .trust-badge{display:inline-flex;align-items:center;gap:10px;background:var(--char);border:1px solid var(--border);border-radius:999px;padding:.6rem 1.3rem;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone);margin-bottom:2rem;}
+  .trust-dot{width:9px;height:9px;border-radius:50%;background:var(--blue);flex-shrink:0;}
+  .cover-title{font-family:var(--font-display);line-height:.95;text-transform:uppercase;}
+  .cover-title .line-white{font-size:clamp(3rem,10vw,9rem);font-weight:800;color:var(--bone);display:block;}
+  .cover-title .line-red{font-size:clamp(1.9rem,5.4vw,4.6rem);font-weight:800;color:var(--orange);display:block;margin-top:.4rem;}
+  .cover-rule{width:100%;height:2px;background:var(--orange);margin:2rem 0;transform:scaleX(0);transform-origin:left;animation:ruleIn .8s .6s cubic-bezier(.16,1,.3,1) forwards;}
+  @keyframes ruleIn{to{transform:scaleX(1);}}
+  .cover-tagline{font-size:1.05rem;color:var(--muted);margin-bottom:3rem;}
+  .cover-byline{font-family:var(--font-mono);font-size:.72rem;font-weight:600;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;}
+  .fade-up{opacity:0;transform:translateY(24px);animation:fadeUp .7s cubic-bezier(.16,1,.3,1) forwards;}
+  @keyframes fadeUp{to{opacity:1;transform:none;}}
+  .trust-badge{animation:fadeUp .7s 0s cubic-bezier(.16,1,.3,1) forwards;opacity:0;transform:translateY(24px);}
+  .cover-title{animation-delay:.2s;}.cover-tagline{animation-delay:.7s;}.cover-byline{animation-delay:.9s;}
+
+  /* SECTIONS */
+  .content{max-width:1200px;margin:0 auto;padding:0 3rem;}
+  .section{padding:5rem 0 2rem;opacity:0;transform:translateY(32px);transition:opacity .6s ease,transform .6s ease;}
+  .section.visible{opacity:1;transform:none;}
+  .section-header{background:var(--char);border:1px solid var(--border);border-radius:16px;padding:1rem 1.5rem;display:flex;align-items:baseline;gap:.75rem;margin-bottom:2rem;}
+  .section-title{font-family:var(--font-display);font-size:2rem;font-weight:800;letter-spacing:.01em;color:var(--bone);text-transform:uppercase;}
+  .sub-heading{font-family:var(--font-display);font-size:1.2rem;font-weight:700;letter-spacing:.01em;text-transform:uppercase;color:var(--bone);border-left:4px solid var(--orange);padding-left:.75rem;margin:2rem 0 .85rem;}
+  .red-label{font-family:var(--font-mono);font-size:.85rem;font-weight:600;letter-spacing:.12em;color:var(--blue);text-transform:uppercase;margin:1.5rem 0 .5rem;}
+  p{font-size:1.05rem;line-height:1.7;color:var(--bone);margin-bottom:.85rem;}
+  .muted{color:var(--muted);}
+  .callout{background:var(--char);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:0 16px 16px 0;padding:1.1rem 1.4rem;margin:1.5rem 0;}
+  .callout p{color:var(--bone);font-style:italic;margin:0;font-size:1.05rem;line-height:1.7;}
+  .statement-card{background:var(--char);border:1px solid var(--border);border-radius:16px;padding:1.5rem 1.75rem;margin:1.5rem 0;}
+  .statement-prefix{font-family:var(--font-mono);font-size:.78rem;font-weight:600;letter-spacing:.12em;color:var(--orange);text-transform:uppercase;}
+  .statement-claim{font-family:var(--font-display);font-weight:800;font-size:1.35rem;color:var(--bone);margin-top:.6rem;line-height:1.3;}
+
+  .bullet-list{list-style:none;margin:.5rem 0 1rem 0;}
+  .bullet-list li{font-size:1rem;line-height:1.65;color:var(--bone);padding:.25rem 0 .25rem 1.4rem;position:relative;}
+  .bullet-list li::before{content:'–';position:absolute;left:0;color:var(--orange);font-weight:700;}
+  .sub-bullet-list{list-style:none;margin:.35rem 0 .35rem 1.5rem;}
+  .sub-bullet-list li{font-size:.95rem;line-height:1.6;color:var(--muted);padding:.2rem 0 .2rem 1.2rem;position:relative;}
+  .sub-bullet-list li::before{content:'›';position:absolute;left:0;color:var(--muted);font-weight:700;}
+
+  /* PHASE / STAGE BOX */
+  .phase-box{display:flex;gap:1.1rem;background:var(--char);border:1px solid var(--border);border-radius:16px;padding:1.25rem 1.5rem;margin:1rem 0;align-items:flex-start;}
+  .phase-title{font-family:var(--font-display);font-size:1.15rem;font-weight:800;letter-spacing:.01em;text-transform:uppercase;color:var(--bone);margin-bottom:.4rem;}
+  .phase-content{min-width:0;flex:1;}
+  .phase-content p{color:var(--muted);margin-bottom:.5rem;}
+  .phase-content .bullet-list li{font-size:.97rem;color:var(--bone);}
+  .phase-content .red-label{margin:1rem 0 .35rem;}
+
+  /* STAT ROW ("record line" device) */
+  .stat-row{display:flex;flex-wrap:wrap;gap:2.25rem;background:var(--char);border:1px solid var(--border);border-radius:16px;padding:1.5rem 1.75rem;margin:1.5rem 0;}
+  .stat-block{display:flex;flex-direction:column;gap:.35rem;min-width:120px;}
+  .stat-num{font-family:var(--font-display);font-weight:800;font-size:2rem;color:var(--bone);line-height:1;}
+  .stat-block:first-child .stat-num{color:var(--orange);}
+  .stat-lbl{font-family:var(--font-mono);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+
+  /* COMMENTS (section-level) */
+  .section-comment-btn{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.5rem;background:transparent;border:1.5px solid var(--border);border-radius:999px;padding:.5rem 1rem;cursor:pointer;font-family:var(--font-mono);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:all .2s;}
+  .section-comment-btn:hover{border-color:var(--orange);color:var(--orange);}
+  .section-comment-btn .cb-count{background:var(--orange);color:var(--graphite);font-size:.68rem;font-weight:700;padding:.1rem .4rem;min-width:20px;text-align:center;border-radius:999px;display:none;}
+  .section-comment-btn.has-comments .cb-count{display:inline-block;}
+  .comment-panel{display:none;border:1px solid var(--border);border-radius:16px;background:var(--char);margin-top:.75rem;}
+  .comment-panel.open{display:block;}
+  .comment-panel-inner{padding:1.25rem;}
+  .comment-thread{margin-bottom:1rem;}
+  .comment-item{border-left:3px solid var(--orange);border-radius:0 10px 10px 0;padding:.75rem 1rem;margin-bottom:.75rem;background:var(--graphite);}
+  .comment-item-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.25rem;margin-bottom:.35rem;}
+  .comment-item-name{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--bone);}
+  .comment-item-time{font-size:.78rem;color:var(--muted);}
+  .comment-item-text{font-size:.95rem;line-height:1.6;color:var(--bone);}
+  .no-comments{font-size:.9rem;color:var(--muted);font-style:italic;margin-bottom:1rem;}
+  .comment-form textarea{width:100%;padding:.6rem .75rem;border:1px solid var(--border);border-radius:10px;font-family:var(--font-body);font-size:.95rem;resize:vertical;outline:none;background:var(--graphite);color:var(--bone);display:block;margin-bottom:.5rem;}
+  .comment-form-row{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
+  .comment-form input[type=text]{flex:1;min-width:140px;padding:.5rem .65rem;border:1px solid var(--border);border-radius:10px;font-family:var(--font-body);font-size:.95rem;outline:none;background:var(--graphite);color:var(--bone);}
+  .comment-post-btn{background:var(--orange);color:var(--graphite);border:none;border-radius:999px;padding:.5rem 1.25rem;font-family:var(--font-display);font-size:.9rem;font-weight:700;letter-spacing:.02em;cursor:pointer;white-space:nowrap;}
+  .comment-post-btn:hover{opacity:.85;}
+  .comment-post-btn:disabled{opacity:.5;cursor:default;}
+  .comment-status{font-size:.82rem;color:var(--muted);margin-top:.35rem;}
+
+  /* FOOTER */
+  footer{background:var(--char);border-top:1px solid var(--border);padding:4rem 3rem;display:flex;justify-content:center;align-items:center;}
+
+  /* ================= TRACKER (fully editable roadmap) ================= */
+  .tk-phase{margin-bottom:2.5rem;}
+  .tk-phase-hdr{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+  .tk-phase-rule{flex:1;height:1px;background:var(--border);}
+  .tk-phase-pill{background:var(--char);border:1px solid var(--border);border-radius:999px;padding:.55rem 1.4rem;display:flex;align-items:baseline;gap:.5rem;flex-shrink:0;}
+  .tk-phase-lbl{font-family:var(--font-mono);font-size:.78rem;font-weight:600;letter-spacing:.08em;color:var(--bone);text-transform:uppercase;}
+  .tk-phase-sub{font-family:var(--font-mono);font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin:-.6rem 0 1rem;text-align:center;}
+  .tk-progress-wrap{background:var(--char);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.4rem;margin-bottom:2rem;display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;}
+  .tk-progress-stat{font-family:var(--font-display);font-size:1.6rem;font-weight:900;color:var(--bone);white-space:nowrap;}
+  .tk-progress-stat span{color:var(--orange);}
+  .tk-progress-track{flex:1;min-width:160px;height:8px;background:var(--border);border-radius:4px;overflow:hidden;}
+  .tk-progress-fill{height:100%;background:var(--orange);border-radius:4px;transition:width .5s ease;}
+  .tk-progress-lbl{font-family:var(--font-mono);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+
+  .tk-card{background:var(--char);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.25rem 1.25rem;}
+  .tk-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding-bottom:.9rem;border-bottom:1px solid var(--border);margin-bottom:1rem;}
+  .tk-action-wrap{flex:1;min-width:0;}
+  .tk-action{font-size:1.02rem;font-weight:600;line-height:1.4;color:var(--bone);}
+  .tk-action.hidden{display:none;}
+  .tk-card-controls{display:flex;align-items:center;gap:.5rem;flex-shrink:0;}
+  .tk-icon-btn{position:relative;background:var(--graphite);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;transition:all .15s;}
+  .tk-icon-btn:hover{border-color:var(--orange);color:var(--orange);}
+  .tk-icon-btn.has-comments{color:var(--bone);}
+  .tk-badge{position:absolute;top:-7px;right:-7px;background:var(--orange);color:var(--graphite);font-size:.62rem;font-weight:700;border-radius:8px;min-width:16px;height:16px;padding:0 3px;display:flex;align-items:center;justify-content:center;line-height:1;}
+
+  select.tk-status-select{width:100%;display:block;text-align:center;text-align-last:center;-moz-text-align-last:center;padding:.7rem 1rem;border:none;border-radius:999px;font-family:var(--font-display);font-weight:700;letter-spacing:.02em;font-size:.9rem;cursor:pointer;appearance:none;-webkit-appearance:none;}
+  .tk-status-select.status-pending{background:var(--border);color:var(--muted);}
+  .tk-status-select.status-in-progress{background:rgba(217,166,46,.18);color:var(--amber);}
+  .tk-status-select.status-complete{background:rgba(63,174,106,.18);color:var(--green);}
+
+  .tk-edit-wrap{display:none;margin-top:.4rem;}
+  .tk-edit-wrap.open{display:block;}
+  .tk-edit-textarea{width:100%;padding:.6rem .75rem;border:1.5px solid var(--orange);border-radius:8px;font-family:var(--font-body);font-size:.98rem;line-height:1.5;resize:vertical;outline:none;background:var(--graphite);color:var(--bone);display:block;margin-bottom:.5rem;min-height:64px;}
+  .tk-edit-actions{display:flex;gap:.5rem;}
+  .tk-edit-save{background:var(--orange);color:var(--graphite);border:none;border-radius:999px;padding:.45rem 1.1rem;font-family:var(--font-display);font-size:.8rem;font-weight:700;cursor:pointer;}
+  .tk-edit-save:hover{opacity:.88;}
+  .tk-edit-save:disabled{opacity:.5;cursor:default;}
+  .tk-edit-cancel{background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:.45rem 1.1rem;font-family:var(--font-display);font-size:.8rem;font-weight:700;cursor:pointer;}
+  .tk-edit-cancel:hover{border-color:var(--orange);color:var(--orange);}
+
+  .tk-comment-panel{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);}
+  .tk-comment-panel.open{display:block;}
+  .tk-comment-thread{margin-bottom:.75rem;display:flex;flex-direction:column;gap:.6rem;}
+  .tk-comment-item{border-left:3px solid var(--orange);border-radius:0 10px 10px 0;padding:.6rem .85rem;background:var(--graphite);}
+  .tk-comment-item-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.25rem;margin-bottom:.25rem;}
+  .tk-comment-item-name{font-family:var(--font-display);font-weight:700;font-size:.9rem;color:var(--bone);}
+  .tk-comment-item-time{font-size:.72rem;color:var(--muted);}
+  .tk-comment-item-text{font-size:.9rem;line-height:1.55;color:var(--bone);}
+  .tk-no-comments{font-size:.85rem;color:var(--muted);font-style:italic;margin-bottom:.75rem;}
+  .tk-comment-form textarea{width:100%;padding:.55rem .7rem;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:.9rem;resize:vertical;outline:none;background:var(--graphite);color:var(--bone);display:block;margin-bottom:.5rem;min-height:52px;}
+  .tk-comment-form-row{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
+  .tk-comment-form input[type=text]{flex:1;min-width:130px;padding:.5rem .6rem;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:.9rem;outline:none;background:var(--graphite);color:var(--bone);}
+  .tk-comment-post-btn{background:var(--orange);color:var(--graphite);border:none;border-radius:999px;padding:.5rem 1.1rem;font-family:var(--font-display);font-size:.85rem;font-weight:700;cursor:pointer;white-space:nowrap;}
+  .tk-comment-post-btn:hover{opacity:.88;}
+  .tk-comment-post-btn:disabled{opacity:.5;cursor:default;}
+  .tk-comment-status{font-size:.78rem;color:var(--muted);margin-top:.3rem;}
+
+  .tk-table-wrap{display:none;overflow-x:auto;}
+  .tk-table{width:100%;border-collapse:collapse;background:var(--char);border:1px solid var(--border);border-radius:14px;overflow:hidden;min-width:760px;}
+  .tk-table thead th{background:var(--graphite);color:var(--bone);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:.75rem 1rem;font-weight:600;}
+  .tk-table thead th.tk-th-center{text-align:center;}
+  .tk-table tbody tr.tk-row{border-top:1px solid var(--border);}
+  .tk-table tbody tr.tk-row:hover{background:rgba(255,255,255,.02);}
+  .tk-table td{padding:.85rem 1rem;font-size:.9rem;color:var(--bone);vertical-align:middle;}
+  .tk-table td.tk-td-action{font-weight:500;line-height:1.4;}
+  .tk-table td.tk-td-status{width:170px;}
+  .tk-table td.tk-td-comments{width:70px;text-align:center;}
+  .tk-table td.tk-td-edit{width:50px;text-align:center;}
+  .tk-table td.tk-td-delete{width:50px;text-align:center;}
+  .tk-table select.tk-status-select{font-size:.78rem;padding:.5rem .5rem;}
+  .tk-comment-row{display:none;}
+  .tk-comment-row.open{display:table-row;}
+  .tk-comment-row td{padding:0;border-top:none;}
+  .tk-comment-row-inner{padding:1.1rem 1.5rem 1.25rem;background:var(--graphite);border-top:1px dashed var(--border);}
+
+  .tk-add-form{display:flex;gap:.6rem;margin-top:.75rem;flex-wrap:wrap;}
+  .tk-add-form input{flex:1;min-width:180px;font-family:var(--font-body);font-size:.9rem;padding:.55rem .7rem;border:1px solid var(--border);border-radius:8px;background:var(--graphite);color:var(--bone);}
+  .tk-add-btn{font-family:var(--font-display);font-weight:700;font-size:.82rem;padding:.55rem 1.2rem;border:none;border-radius:999px;cursor:pointer;background:var(--orange);color:var(--graphite);}
+  .tk-add-btn:hover{opacity:.88;}
+  .tk-add-toggle{margin-top:.9rem;background:none;border:2px dashed var(--border);border-radius:14px;width:100%;padding:.75rem;font-family:var(--font-mono);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:.76rem;color:var(--muted);cursor:pointer;}
+  .tk-add-toggle:hover{border-color:var(--orange);color:var(--orange);}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .content{padding:0 1.25rem;}
+    nav{padding:0 1.25rem;}
+    footer{padding:3rem 1.25rem;}
+    .section-title{font-size:1.3rem;}
+    #cover{padding:5rem 1.25rem 3rem;}
+    .cover-title .line-white{font-size:clamp(2.3rem,12vw,9rem);}
+    .cover-title .line-red{font-size:clamp(1.3rem,6.6vw,4.6rem);margin-top:.25rem;}
+    .trust-badge{padding:.5rem 1rem;font-size:.7rem;gap:8px;}
+    .cover-tagline{font-size:.95rem;margin-bottom:2.25rem;}
+  }
+  @media(max-width:640px){
+    .stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 1.25rem;}
+    .stat-block{min-width:0;}
+    .stat-num{font-size:1.6rem;}
+  }
+  @media(min-width:901px){
+    .tk-body-mobile{display:none;}
+    .tk-table-wrap{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">FTR<span class="colon"> : </span>TryTroop</div>
+  <div class="nav-links">
+    <a href="#s01">Objective</a>
+    <a href="#s02">Snapshot</a>
+    <a href="#s03">Blockers</a>
+    <a href="#s04">Foundation</a>
+    <a href="#s05">Search &amp; Acquisition</a>
+    <a href="#s06">Recurring Revenue</a>
+    <a href="#s07">Incremental Growth</a>
+    <a href="#s08">PPC Approach</a>
+    <a href="#s09">Roadmap</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()" id="hbg">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="#s01" onclick="toggleMenu()">Objective</a>
+  <a href="#s02" onclick="toggleMenu()">Current Snapshot</a>
+  <a href="#s03" onclick="toggleMenu()">Key Issues &amp; Blockers</a>
+  <a href="#s04" onclick="toggleMenu()">Rebuild the Foundation</a>
+  <a href="#s05" onclick="toggleMenu()">Recover Search Visibility &amp; Customer Acquisition</a>
+  <a href="#s06" onclick="toggleMenu()">Rebuild Recurring Revenue</a>
+  <a href="#s07" onclick="toggleMenu()">Drive Incremental Growth</a>
+  <a href="#s08" onclick="toggleMenu()">PPC Approach</a>
+  <a href="#s09" onclick="toggleMenu()">Year-End Roadmap</a>
+</div>
+<div id="progress"></div>
+
+<!-- COVER -->
+<section id="cover">
+  <div class="cover-inner">
+    <div class="trust-badge fade-up"><span class="trust-dot"></span>2026</div>
+    <div class="cover-title">
+      <span class="line-white">TryTroop</span>
+      <span class="line-red">Amazon Recovery &amp; Growth Strategy</span>
+    </div>
+    <div class="cover-rule"></div>
+    <p class="cover-byline fade-up">Prepared by For The Record</p>
+  </div>
+</section>
+
+<!-- S01 — OBJECTIVE -->
+<div class="section" id="s01">
+  <div class="content">
+    <div class="section-header"><span class="section-title">Objective</span></div>
+
+    <p>With all three core products back in stock, the remainder of 2026 should focus on rebuilding the customer acquisition and recurring-revenue engines disrupted by the prolonged inventory constraints.</p>
+
+    <div class="callout"><p>The goal is to progressively return TryTroop toward its historical $40K+ monthly revenue level, while rebuilding search visibility, the subscriber base, and a healthier balance between paid and organic growth.</p></div>
+
+    <div id="comments-s01"></div>
+  </div>
+</div>
+
+<!-- S02 — CURRENT SNAPSHOT -->
+<div class="section" id="s02">
+  <div class="content">
+    <div class="section-header"><span class="section-title">Current Snapshot</span></div>
+
+    <div class="stat-row">
+      <div class="stat-block"><div class="stat-num">$43K</div><div class="stat-lbl">Pre-OOS Average Monthly Revenue</div></div>
+      <div class="stat-block"><div class="stat-num">~80%</div><div class="stat-lbl">Lion's Mane Share of Revenue</div></div>
+      <div class="stat-block"><div class="stat-num">~55</div><div class="stat-lbl">Current Subscribers (From 700+)</div></div>
+    </div>
+
+    <p>Before going OOS, TryTroop averaged approximately $43K/month, with Lion's Mane generating ~80% of revenue.</p>
+    <p>The prolonged OOS period significantly reduced search visibility, customer acquisition, and Subscribe &amp; Save, with the subscriber base declining from 700+ to ~55.</p>
+    <p>All three core products are now back in stock, but the brand needs to rebuild the visibility, customer base, and recurring revenue that previously supported its historical sales level.</p>
+
+    <div id="comments-s02"></div>
+  </div>
+</div>
+
+<!-- S03 — KEY ISSUES & BLOCKERS -->
+<div class="section" id="s03">
+  <div class="content">
+    <div class="section-header"><span class="section-title">Key Issues &amp; Blockers</span></div>
+
+    <ul class="bullet-list">
+      <li>Search exposure remains significantly below the pre-OOS baseline, particularly for Lion's Mane.</li>
+      <li>Lion's Mane has lost Subscribe &amp; Save eligibility, limiting subscriber acquisition on the Hero ASIN.</li>
+      <li>The subscriber base has declined by more than 90%.</li>
+      <li>Historical growth was highly PPC-dependent and should not simply be recreated at the same economics.</li>
+      <li>Inventory stability remains critical to protecting the recovery.</li>
+    </ul>
+
+    <div id="comments-s03"></div>
+  </div>
+</div>
+
+<!-- S04 — GROWTH AREA 1: REBUILD THE FOUNDATION -->
+<div class="section" id="s04">
+  <div class="content">
+    <div class="section-header"><span class="section-title">Growth Area 1: Rebuild the Foundation</span></div>
+
+    <p>The first priority is to protect inventory availability and restore Subscribe &amp; Save eligibility for the Hero ASIN, Lion's Mane Gummies, to support sustainable growth.</p>
+
+    <div class="sub-heading">Protect Inventory Availability</div>
+    <p>Inventory instability was the root cause of the decline and contributed to lost search visibility, sales velocity, subscribers, and S&amp;S eligibility.</p>
+    <div class="red-label">Key Actions</div>
+    <ul class="bullet-list">
+      <li>Maintain sufficient inventory coverage across all three core ASINs to support the year-end recovery.</li>
+      <li>Align advertising, promotional activity, and subscriber acquisition with inventory availability.</li>
+      <li>Establish stronger inventory safeguards to prevent another OOS period from interrupting the recovery.</li>
+    </ul>
+
+    <div class="sub-heading">Restore Lion's Mane Subscribe &amp; Save Eligibility</div>
+    <p>Lion's Mane is currently unable to acquire new subscribers through Sub&amp;Save, creating a significant blocker for the Hero ASIN.</p>
+    <div class="red-label">Key Actions</div>
+    <ul class="bullet-list">
+      <li>Work with Amazon to restore Lion's Mane Sub&amp;Save eligibility now that inventory has stabilized.</li>
+      <li>Once reinstated, activate the planned 15% Sub&amp;Save incentive to accelerate subscriber acquisition.</li>
+      <li>Protect Sub&amp;Save eligibility through consistent inventory availability going forward.</li>
+    </ul>
+
+    <div id="comments-s04"></div>
+  </div>
+</div>
+
+<!-- S05 — GROWTH AREA 2: RECOVER SEARCH VISIBILITY & CUSTOMER ACQUISITION -->
+<div class="section" id="s05">
+  <div class="content">
+    <div class="section-header"><span class="section-title">Growth Area 2: Recover Search Visibility &amp; Customer Acquisition</span></div>
+
+    <p>TryTroop's largest immediate growth opportunity is rebuilding the non-branded visibility and customer acquisition lost during the OOS period.</p>
+    <p>Lion's Mane should lead the recovery due to its historical contribution of approximately 80% of brand revenue.</p>
+
+    <div class="sub-heading">Recover Priority Search Terms</div>
+    <p>SEO and Advertising should align around a defined Search Term List, prioritizing keywords where TryTroop historically demonstrated strong relevance and customer engagement.</p>
+
+    <div class="red-label">Lion's Mane Priority Search Areas — High-Intent Product Searches</div>
+    <ul class="bullet-list">
+      <li>lions mane gummies</li>
+      <li>lions mane gummies for adults</li>
+      <li>lions mane mushroom gummies</li>
+      <li>lion's mane gummies</li>
+    </ul>
+
+    <div class="red-label">Benefit-Based Acquisition</div>
+    <ul class="bullet-list">
+      <li>focus gummies</li>
+      <li>focus supplement</li>
+      <li>brain gummies</li>
+      <li>nootropic gummies</li>
+    </ul>
+
+    <p>Prioritize high-intent product searches first, then progressively expand into broader benefit and category terms as visibility and sales velocity recover.</p>
+
+    <div class="sub-heading">Use PPC to Rebuild Visibility &amp; Sales Velocity</div>
+    <p>Advertising should initially support search recovery, sales velocity, organic ranking, and customer acquisition, rather than focusing exclusively on short-term ACOS efficiency.</p>
+    <p>As organic visibility and recurring revenue rebuild:</p>
+    <ul class="bullet-list">
+      <li>Scale proven non-branded opportunities.</li>
+      <li>Increase organic contribution.</li>
+      <li>Gradually improve TACoS.</li>
+      <li>Reduce reliance on paid traffic where organic position has been restored.</li>
+    </ul>
+    <p>Historical PPC performance should not simply be recreated. The objective is to regain scale while developing a healthier paid/organic balance.</p>
+
+    <div class="sub-heading">Prioritize Investment by Product</div>
+    <div class="phase-box">
+      <div class="phase-content">
+        <div class="phase-title">Lion's Mane — Primary Recovery Product</div>
+        <p>Concentrate the largest share of SEO, PPC, S&amp;S, and customer-acquisition investment here.</p>
+      </div>
+    </div>
+    <div class="phase-box">
+      <div class="phase-content">
+        <div class="phase-title">Reishi — Secondary Growth Product</div>
+        <p>Scale selectively as search visibility and performance recover.</p>
+      </div>
+    </div>
+    <div class="phase-box">
+      <div class="phase-content">
+        <div class="phase-title">Super 6 — Controlled Growth</div>
+        <p>Maintain support and scale where performance demonstrates incremental opportunity.</p>
+      </div>
+    </div>
+
+    <div class="sub-heading">Strengthen Search-Result Recognition</div>
+    <p>As visibility returns, ensure the listings are positioned to convert impressions into clicks.</p>
+    <p>For Lion's Mane in particular, optimize the search-result recognition around the primary customer need and key product differentiators, including:</p>
+    <ul class="bullet-list">
+      <li>Lion's Mane gummy format</li>
+      <li>Focus / cognitive support</li>
+      <li>100% fruiting body mushrooms</li>
+      <li>Triple extraction</li>
+      <li>Organic USA-grown mushrooms</li>
+      <li>No mycelium grain/fillers</li>
+    </ul>
+    <p>The objective is to improve both search visibility and recognition on the priority recovery terms.</p>
+
+    <div id="comments-s05"></div>
+  </div>
+</div>
+
+<!-- S06 — GROWTH AREA 3: REBUILD RECURRING REVENUE -->
+<div class="section" id="s06">
+  <div class="content">
+    <div class="section-header"><span class="section-title">Growth Area 3: Rebuild Recurring Revenue</span></div>
+
+    <p>TryTroop historically reached 700+ active subscriptions, compared with approximately 55 today.</p>
+    <p>Subscribers also generated significantly greater customer value than one-time purchasers, making recurring revenue a major component of the historical business model.</p>
+
+    <div class="sub-heading">Rebuild Subscribe &amp; Save</div>
+    <p>Once Sub&amp;Save is restored across the core catalog:</p>
+    <ul class="bullet-list">
+      <li>Use strong Sub&amp;Save incentives to accelerate subscriber acquisition.</li>
+      <li>Prioritize Lion's Mane due to its historical scale and role as the primary acquisition product.</li>
+      <li>Track subscriber growth and retention alongside revenue recovery.</li>
+      <li>Maintain sufficient inventory to protect recurring deliveries and prevent further subscriber loss.</li>
+    </ul>
+    <p>The historical 700+ subscriber base should serve as a long-term recovery benchmark, rather than an immediate year-end target.</p>
+
+    <div class="sub-heading">Protect Subscriber Retention</div>
+    <p>Historical Sub&amp;Save performance demonstrates that customers who remain subscribed become increasingly valuable over time.</p>
+    <p>The objective should therefore extend beyond acquiring subscriptions to rebuilding a long-term recurring customer base.</p>
+    <p>Prioritize:</p>
+    <ul class="bullet-list">
+      <li>New subscriber growth</li>
+      <li>60/90-day retention</li>
+      <li>Growth in longer-term subscribers</li>
+      <li>Subscriber revenue</li>
+      <li>Consistent Sub&amp;Save fulfillment</li>
+    </ul>
+
+    <div id="comments-s06"></div>
+  </div>
+</div>
+
+<!-- S07 — GROWTH AREA 4: DRIVE INCREMENTAL GROWTH -->
+<div class="section" id="s07">
+  <div class="content">
+    <div class="section-header"><span class="section-title">Growth Area 4: Drive Incremental Growth</span></div>
+
+    <p>Once the core search and recurring-revenue recovery initiatives are underway, use additional channels to expand customer acquisition and support incremental sales.</p>
+
+    <div class="sub-heading">Scale Creator Connections</div>
+    <p>Creator Connections has historically demonstrated efficient incremental sales, particularly for Lion's Mane, and should complement PPC as an additional customer-acquisition channel.</p>
+    <div class="red-label">Key Actions</div>
+    <ul class="bullet-list">
+      <li>Prioritize Lion's Mane campaign.</li>
+      <li>Actively manage creator relationships and content.</li>
+      <li>Identify creators and content generating meaningful sales.</li>
+      <li>Scale investment behind proven creator activity.</li>
+      <li>Develop longer-term relationships with high-performing creators.</li>
+    </ul>
+
+    <div class="sub-heading">Increase Customer Value</div>
+    <p>Use each product's distinct need state to encourage broader product adoption:</p>
+    <ul class="bullet-list">
+      <li>Lion's Mane → Focus / Morning</li>
+      <li>Super 6 → Daily Broad Wellness</li>
+      <li>Reishi → Relax / Evening</li>
+    </ul>
+    <p>Use A+, Brand Story, Store, and relevant promotional opportunities to introduce existing customers to additional TryTroop products and increase customer value beyond the initial purchase.</p>
+
+    <div class="sub-heading">Optimize the Store as Traffic Returns</div>
+    <p>The current Store has strong fundamentals and does not require an immediate rebuild. The primary limitation today is traffic rather than the Store experience itself.</p>
+    <p>As traffic and sales recover, revisit the customer journey to strengthen:</p>
+    <ul class="bullet-list">
+      <li>Product discovery</li>
+      <li>Need-state navigation</li>
+      <li>Cross-selling</li>
+      <li>Movement across the TryTroop catalog</li>
+    </ul>
+
+    <div id="comments-s07"></div>
+  </div>
+</div>
+
+<!-- S08 — PPC APPROACH -->
+<div class="section" id="s08">
+  <div class="content">
+    <div class="section-header"><span class="section-title">PPC Approach</span></div>
+
+    <p>Advertising has been deliberately restrained through most of 2026. Budgets were capped during the OOS period to protect remaining inventory, campaigns restarted at a slow pace as stock arrived, and Lion's Mane advertising only resumed meaningfully once its inventory landed in August. Recent performance therefore reflects a warm-up period rather than a true baseline.</p>
+    <p>The current picture is consistent with a brand that has lost its search position. Branded searches still convert strongly and remain efficient. Non branded searches, which represent the majority of spend, are converting well below the level required to support them. Customers who already know TryTroop continue to buy. The account is no longer winning cold traffic efficiently.</p>
+
+    <div class="statement-card">
+      <span class="statement-prefix">For the record:</span>
+      <p class="statement-claim">Rebuilding non branded acquisition is the objective. It cannot simply be scaled at today's economics.</p>
+    </div>
+
+    <div class="sub-heading">PPC Objective</div>
+    <p>Advertising's role through year end is to rebuild non branded visibility, sales velocity and organic ranking on the priority Lion's Mane search terms, rather than to hit a short-term efficiency target.</p>
+    <p>Two guardrails apply:</p>
+    <ul class="bullet-list">
+      <li>Ranking focused activity may deliberately run above break even on defined keywords for a defined period. All other activity should be working toward profitability.</li>
+      <li>TACOS is the primary measure of progress, not ACOS. Lion's Mane historically ran at approximately 10% TACOS. A progressive return toward that level, with revenue growing at the same time, is the correct definition of success.</li>
+    </ul>
+
+    <div class="sub-heading">Phase 1: Restore Efficiency and Structure</div>
+    <p>Advertising spend is currently spread across a very large number of campaigns and keywords, the majority of which generate little or no activity. Spend is not constrained by budget. It is constrained by structure, relevance and bidding. Before investment is increased, the account needs to be made optimisable.</p>
+    <p>A meaningful share of spend is also reaching traffic unrelated to the products, particularly cannabis and confectionery search terms. These attract clicks at well above average rates and produce almost no sales, making them the fastest available efficiency gain.</p>
+    <div class="red-label">Key Actions</div>
+    <ul class="bullet-list">
+      <li>Apply a structural negative keyword layer to eliminate irrelevant traffic across the account.</li>
+      <li>Consolidate the campaign structure, concentrating spend into fewer campaigns that accumulate enough data to be optimised and measured.</li>
+      <li>Review the existing negative keyword layer to confirm no priority or branded search terms are being unintentionally blocked.</li>
+      <li>Bring non-branded bids back in line with current conversion performance.</li>
+      <li>Fully fund branded and brand-defence coverage, which remains efficient and is under-invested during a period when the brand is rebuilding recognition.</li>
+      <li>Rebuild the priority Lion's Mane campaigns around the defined Search Term List, structured so ranking progress on each term can be measured individually.</li>
+    </ul>
+
+    <div class="sub-heading">Phase 2: Rebuild Non-Branded Visibility</div>
+    <p>Once structure and efficiency are corrected, investment can scale behind the terms demonstrating recovery.</p>
+    <div class="red-label">Key Actions</div>
+    <ul class="bullet-list">
+      <li>Scale investment behind high-intent Lion's Mane product searches where visibility is available but position remains weak.</li>
+      <li>Expand into benefit-based acquisition terms only where high-intent performance supports it.</li>
+      <li>Grow competitor and category targeting, currently the strongest non-branded activity in the account and a faster route back to visibility while organic ranking recovers.</li>
+      <li>Reactivate Sponsored Brands and Sponsored Display selectively for top-of-search coverage, brand defence and retargeting. Both are effectively dormant today.</li>
+      <li>Increase Reishi investment selectively as visibility recovers, maintaining Super 6 at controlled levels.</li>
+      <li>Align paid acquisition with the Sub&amp;Save incentive once Lion's Mane eligibility is restored, so advertising builds recurring revenue rather than one-time purchases.</li>
+    </ul>
+
+    <div class="sub-heading">Phase 3: Scale and Improve Efficiency</div>
+    <div class="red-label">Key Actions</div>
+    <ul class="bullet-list">
+      <li>Scale proven non-branded acquisition where organic ranking is demonstrably improving.</li>
+      <li>Progressively reduce paid support on terms where organic position has been restored, increasing organic contribution.</li>
+      <li>Improve TACoS through revenue growth and organic recovery rather than through spend reduction.</li>
+      <li>Maintain ranking pressure on core Lion's Mane terms through the year-end period.</li>
+      <li>Keep advertising aligned to inventory coverage at all times, reducing spend ahead of any stock risk rather than after it.</li>
+    </ul>
+
+    <div class="sub-heading">Dependencies</div>
+    <ul class="bullet-list">
+      <li>Advertising cannot deliver the recovery alone. Three factors outside PPC determine what it can achieve.</li>
+      <li>Listing conversion is the largest single constraint. Lion's Mane is winning search impressions on its priority terms but converting them into clicks and sales at well below the level required. Strengthening search-result recognition is a prerequisite for scaling non-branded investment, not a parallel workstream.</li>
+      <li>Inventory stability determines whether investment compounds. Every previous ramp in this account was interrupted by stock.</li>
+      <li>Sub&amp;Save eligibility determines the value of each acquired customer. Until Lion's Mane can acquire subscribers, advertising is buying one-time purchasers at a cost structure that only makes sense against recurring revenue.</li>
+    </ul>
+
+    <div class="sub-heading">Measurement</div>
+    <p>PPC will be reported monthly against the recovery, prioritising:</p>
+    <ul class="bullet-list">
+      <li>TACOS trend as the primary efficiency measure.</li>
+      <li>Organic ranking and visibility on the priority Search Term List.</li>
+      <li>Non-branded ad sales and orders as the customer acquisition measure.</li>
+      <li>Conversion performance on priority search terms as the listing health signal.</li>
+      <li>Subscriber acquisition attributable to paid traffic.</li>
+      <li>Weekly performance currently moves on very small order volumes, so short-term swings should be treated as noise. Four week trends are the meaningful read.</li>
+    </ul>
+
+    <div id="comments-s08"></div>
+  </div>
+</div>
+
+<!-- S09 — YEAR-END ROADMAP -->
+<div class="section" id="s09">
+  <div class="content">
+    <div class="section-header"><span class="section-title">Year-End Roadmap</span></div>
+
+    <p>Track progress against every action in the growth plan. Update a status as work moves along, edit an action's wording directly, add a comment, or add a new action under any phase.</p>
+
+    <div id="roadmapRoot"></div>
+
+    <div id="comments-s09"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="text-align:center;width:100%;">
+    <div style="font-family:var(--font-display);font-size:clamp(1.5rem,4vw,2.4rem);font-weight:800;text-transform:uppercase;letter-spacing:.01em;color:var(--orange);margin-bottom:.6rem;">TryTroop</div>
+    <div style="font-family:var(--font-mono);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);">For The Record &nbsp;·&nbsp; 2026 Amazon Recovery &amp; Growth Strategy</div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu(){
+    document.getElementById('navMobile').classList.toggle('open');
+  }
+
+  // Progress bar
+  window.addEventListener('scroll',()=>{
+    const d=document.documentElement;
+    const pct=(d.scrollTop/(d.scrollHeight-d.clientHeight));
+    document.getElementById('progress').style.transform='scaleX('+pct+')';
+  });
+
+  // Section fade-in
+  const sections=document.querySelectorAll('.section');
+  const sectionObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('visible');});
+  },{threshold:0});
+  sections.forEach(s=>sectionObs.observe(s));
+  setTimeout(()=>{ sections.forEach(s=>s.classList.add('visible')); },1500);
+
+  /* ============================================================
+     SUPABASE — shared BAD Marketing / FTR project
+     ============================================================ */
+  const SUPABASE_URL='https://zbcqdcwibbuyfmytfngn.supabase.co';
+  const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpiY3FkY3dpYmJ1eWZteXRmbmduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyOTgyNTEsImV4cCI6MjA5Nzg3NDI1MX0.gXJna_dG08OVNyQy6VyakhJ7ays93ibLlWCDrS6W1RM';
+  const DOC_PREFIX='trytroop-2026-recovery';
+
+  const SECTIONS={
+    's01':'Objective',
+    's02':'Current Snapshot',
+    's03':'Key Issues & Blockers',
+    's04':'Growth Area 1: Rebuild the Foundation',
+    's05':'Growth Area 2: Recover Search Visibility & Customer Acquisition',
+    's06':'Growth Area 3: Rebuild Recurring Revenue',
+    's07':'Growth Area 4: Drive Incremental Growth',
+    's08':'PPC Approach',
+    's09':'Year-End Roadmap'
+  };
+
+  async function fetchComments(){
+    try{
+      const ids=Object.keys(SECTIONS).map(s=>`${DOC_PREFIX}-${s}`);
+      const r=await fetch(
+        `${SUPABASE_URL}/rest/v1/comments?section_id=in.(${ids.map(s=>`"${s}"`).join(',')})&order=created_at.asc`,
+        {headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}}
+      );
+      return await r.json();
+    }catch(e){return[];}
+  }
+
+  async function saveComment(sectionId,name,body){
+    const r=await fetch(`${SUPABASE_URL}/rest/v1/comments`,{
+      method:'POST',
+      headers:{
+        'apikey':SUPABASE_KEY,
+        'Authorization':`Bearer ${SUPABASE_KEY}`,
+        'Content-Type':'application/json',
+        'Prefer':'return=representation'
+      },
+      body:JSON.stringify({section_id:`${DOC_PREFIX}-${sectionId}`,name:name||'Anonymous',body})
+    });
+    if(!r.ok) throw new Error('Failed to save');
+    return await fetchComments();
+  }
+
+  function formatDate(iso){
+    const d=new Date(iso);
+    return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
+      +' · '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  }
+
+  function escHtml(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function renderSection(id,comments){
+    const container=document.getElementById('comments-'+id);
+    if(!container) return;
+    const fullId=`${DOC_PREFIX}-${id}`;
+    const sectionComments=comments.filter(c=>c.section_id===fullId);
+    const count=sectionComments.length;
+    container.innerHTML=`
+      <button class="section-comment-btn ${count>0?'has-comments':''}" onclick="togglePanel('${id}')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        ${count>0?count+' comment'+(count>1?'s':''):'Add comment'}
+        <span class="cb-count">${count}</span>
+      </button>
+      <div class="comment-panel ${count>0?'open':''}" id="panel-${id}">
+        <div class="comment-panel-inner">
+          <div class="comment-thread" id="thread-${id}">
+            ${count===0?'<p class="no-comments">No comments yet on this section.</p>':
+              sectionComments.map(c=>`
+                <div class="comment-item">
+                  <div class="comment-item-header">
+                    <span class="comment-item-name">${escHtml(c.name||'Anonymous')}</span>
+                    <span class="comment-item-time">${formatDate(c.created_at)}</span>
+                  </div>
+                  <p class="comment-item-text">${escHtml(c.body)}</p>
+                </div>`).join('')}
+          </div>
+          <div class="comment-form">
+            <textarea id="txt-${id}" rows="2" placeholder="Write a comment or question on this section..."></textarea>
+            <div class="comment-form-row">
+              <input type="text" id="name-${id}" placeholder="Your name (optional)">
+              <button class="comment-post-btn" id="btn-${id}" onclick="postComment('${id}')">Post</button>
+            </div>
+            <div class="comment-status" id="status-${id}"></div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function togglePanel(id){
+    const panel=document.getElementById('panel-'+id);
+    panel.classList.toggle('open');
+    if(panel.classList.contains('open')){
+      setTimeout(()=>{const t=document.getElementById('txt-'+id);if(t)t.focus();},50);
+    }
+  }
+
+  async function postComment(id){
+    const txt=document.getElementById('txt-'+id);
+    const nameEl=document.getElementById('name-'+id);
+    const btn=document.getElementById('btn-'+id);
+    const status=document.getElementById('status-'+id);
+    const body=txt.value.trim();
+    if(!body){status.textContent='Please write something first.';status.style.color='#F67A1C';return;}
+    btn.disabled=true;status.textContent='Posting...';status.style.color='#8A9099';
+    try{
+      const comments=await saveComment(id,nameEl.value.trim(),body);
+      txt.value='';nameEl.value='';
+      status.textContent='Posted ✓';status.style.color='#3FAE6A';
+      setTimeout(()=>{status.textContent='';},3000);
+      Object.keys(SECTIONS).forEach(sid=>renderSection(sid,comments));
+      setTimeout(()=>{const p=document.getElementById('panel-'+id);if(p)p.classList.add('open');},50);
+    }catch(e){
+      status.textContent='Failed to post. Please try again.';status.style.color='#F67A1C';
+    }
+    btn.disabled=false;
+  }
+
+  async function initComments(){
+    const comments=await fetchComments();
+    Object.keys(SECTIONS).forEach(id=>renderSection(id,comments));
+    setTimeout(()=>{
+      Object.keys(SECTIONS).forEach(id=>{
+        const panel=document.getElementById('panel-'+id);
+        const hasComments=comments.some(c=>c.section_id===`${DOC_PREFIX}-${id}`);
+        if(panel&&hasComments) panel.classList.add('open');
+      });
+    },200);
+  }
+
+  /* ============================================================
+     TRACKER — fully editable roadmap (status, edit, comment, add)
+     Event-sourced (append-only) in the shared Supabase "comments"
+     table, using a "~" key pattern:
+       section_id = `${DOC_PREFIX}~${trackerKey}~${phaseKey}~${itemId}`
+     ============================================================ */
+
+  const ROADMAP_PHASES = [
+    { key:'first30', label:'First 30 Days', sub:'Restore the Foundation',
+      seed:[
+        {id:'i1', action:'Protect inventory availability across the core catalog.'},
+        {id:'i2', action:"Restore Lion's Mane Sub&Save eligibility and activate the 15% coupon."},
+        {id:'i3', action:'Execute the priority Search Term List.'},
+        {id:'i4', action:'Begin rebuilding search visibility and organic ranking.'},
+        {id:'i5', action:"Increase PPC support behind high-intent Lion's Mane searches."},
+        {id:'i6', action:'Actively manage Creator Connections.'}
+      ]},
+    { key:'days3160', label:'Days 31–60', sub:'Build Momentum',
+      seed:[
+        {id:'i1', action:'Scale search terms demonstrating improving visibility and sales.'},
+        {id:'i2', action:'Expand into benefit-based acquisition where performance supports growth.'},
+        {id:'i3', action:'Increase Reishi investment selectively.'},
+        {id:'i4', action:'Accelerate subscriber acquisition and monitor early retention.'},
+        {id:'i5', action:'Continue organic ranking recovery.'}
+      ]},
+    { key:'yearend', label:'Year-End', sub:'Scale & Improve Efficiency',
+      seed:[
+        {id:'i1', action:'Scale proven non-branded acquisition.'},
+        {id:'i2', action:'Increase organic contribution and progressively improve TACoS.'},
+        {id:'i3', action:'Continue rebuilding the subscriber base and repeat revenue.'},
+        {id:'i4', action:'Expand cross-selling across the catalog.'},
+        {id:'i5', action:'Scale proven Creator Connections activity.'},
+        {id:'i6', action:'Revisit Store optimization as traffic becomes meaningful.'}
+      ]}
+  ];
+
+  const STATUS_OPTIONS = ['Pending','In Progress','Complete'];
+  let ALL_TRACKER_EVENTS = [];
+
+  async function fetchTrackerEvents(){
+    try{
+      const r = await fetch(`${SUPABASE_URL}/rest/v1/comments?section_id=like.${DOC_PREFIX}~*&order=created_at.asc`,
+        { headers:{ apikey:SUPABASE_KEY, Authorization:`Bearer ${SUPABASE_KEY}` } });
+      if(!r.ok) throw new Error('fetch failed');
+      return await r.json();
+    }catch(e){ console.error(e); return null; }
+  }
+
+  async function pushTrackerEvent(trackerKey, phaseKey, itemId, author, payload){
+    const section_id = `${DOC_PREFIX}~${trackerKey}~${phaseKey}~${itemId}`;
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/comments`, {
+      method:'POST',
+      headers:{ apikey:SUPABASE_KEY, Authorization:`Bearer ${SUPABASE_KEY}`,
+                'Content-Type':'application/json', 'Prefer':'return=representation' },
+      body: JSON.stringify({ section_id, name: author || 'Team', body: JSON.stringify(payload) })
+    });
+    if(!r.ok) throw new Error('save failed');
+    return await r.json();
+  }
+
+  function buildPhaseState(events, trackerKey, phaseKey, seedItems){
+    const items = {};
+    seedItems.forEach(s => { items[s.id] = { id:s.id, action:s.action, status:s.status||'Pending', deleted:false, comments:[] }; });
+
+    (events||[]).forEach(ev => {
+      const parts = ev.section_id.split('~');
+      if(parts[1] !== trackerKey || parts[2] !== phaseKey) return;
+      const itemId = parts[3];
+      let payload; try{ payload = JSON.parse(ev.body); }catch(e){ return; }
+      if(!items[itemId]) items[itemId] = { id:itemId, action:'', status:'Pending', deleted:false, comments:[] };
+      if(payload.op === 'add'){
+        items[itemId].action = payload.action;
+        items[itemId].status = 'Pending';
+        items[itemId].deleted = false;
+      } else if(payload.op === 'status'){
+        items[itemId].status = payload.status;
+      } else if(payload.op === 'edit'){
+        items[itemId].action = payload.action;
+      } else if(payload.op === 'delete'){
+        items[itemId].deleted = true;
+      } else if(payload.op === 'comment'){
+        items[itemId].comments.push({ name: ev.name, text: payload.text, created_at: ev.created_at });
+      }
+    });
+    return Object.values(items).filter(i => !i.deleted);
+  }
+
+  function statusClass(status){
+    return 'status-' + status.toLowerCase().replace(/\s+/g,'-');
+  }
+
+  function renderTracker(rootId, trackerKey, phases){
+    const root = document.getElementById(rootId);
+    root.innerHTML = '';
+    let total = 0, complete = 0;
+
+    const phaseStates = phases.map(phase => {
+      const items = buildPhaseState(ALL_TRACKER_EVENTS, trackerKey, phase.key, phase.seed);
+      total += items.length;
+      complete += items.filter(i => i.status === 'Complete').length;
+      return { phase, items };
+    });
+
+    const overallPct = total ? Math.round((complete/total)*100) : 0;
+    const progressWrap = document.createElement('div');
+    progressWrap.className = 'tk-progress-wrap';
+    progressWrap.innerHTML = `
+      <div class="tk-progress-stat">${complete}<span>/${total}</span></div>
+      <div class="tk-progress-track"><div class="tk-progress-fill" style="width:${overallPct}%"></div></div>
+      <div class="tk-progress-lbl">${overallPct}% Complete</div>`;
+    root.appendChild(progressWrap);
+
+    phaseStates.forEach(({phase, items}) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'tk-phase';
+      wrap.innerHTML = `
+        <div class="tk-phase-hdr">
+          <div class="tk-phase-rule"></div>
+          <div class="tk-phase-pill"><span class="tk-phase-lbl">${escHtml(phase.label)}</span></div>
+          <div class="tk-phase-rule"></div>
+        </div>
+        ${phase.sub ? `<div class="tk-phase-sub">${escHtml(phase.sub)}</div>` : ''}
+        <div class="tk-body-mobile" data-phase="${phase.key}"></div>
+        <div class="tk-table-wrap" data-phase="${phase.key}"></div>
+        <button class="tk-add-toggle" data-phase="${phase.key}" data-role="add-toggle">+ Add Action to This Phase</button>
+        <div class="tk-add-form" data-phase="${phase.key}" style="display:none;">
+          <input type="text" placeholder="New action…" data-role="add-input">
+          <button class="tk-add-btn" data-role="add-submit">Add</button>
+        </div>
+      `;
+      root.appendChild(wrap);
+
+      const body = wrap.querySelector('.tk-body-mobile');
+      items.forEach(i => body.appendChild(renderTrackerCard(trackerKey, phase.key, i)));
+
+      const tableWrap = wrap.querySelector('.tk-table-wrap');
+      tableWrap.appendChild(renderTrackerTable(trackerKey, phase.key, items));
+
+      wrap.querySelector('[data-role="add-toggle"]').addEventListener('click', () => {
+        const form = wrap.querySelector('.tk-add-form');
+        form.style.display = form.style.display === 'none' ? 'flex' : 'none';
+        if (form.style.display === 'flex') form.querySelector('[data-role="add-input"]').focus();
+      });
+      wrap.querySelector('[data-role="add-submit"]').addEventListener('click', async () => {
+        const input = wrap.querySelector('[data-role="add-input"]');
+        const val = input.value.trim();
+        if (!val) return;
+        const newId = 'new-' + Date.now() + '-' + Math.random().toString(36).slice(2,7);
+        const btn = wrap.querySelector('[data-role="add-submit"]');
+        btn.disabled = true; btn.textContent = 'Adding…';
+        try{
+          await pushTrackerEvent(trackerKey, phase.key, newId, 'Team', { op:'add', action: val });
+          input.value = '';
+          wrap.querySelector('.tk-add-form').style.display = 'none';
+          await reloadTrackers();
+        }catch(e){
+          alert('Could not add action — check your connection and try again.');
+        }
+        btn.disabled = false; btn.textContent = 'Add';
+      });
+    });
+  }
+
+  function commentPanelBodyHTML(domId, item){
+    const commentCount = (item.comments || []).length;
+    const thread = commentCount === 0
+      ? '<p class="tk-no-comments">No comments yet on this action.</p>'
+      : item.comments.map(c => `
+          <div class="tk-comment-item">
+            <div class="tk-comment-item-header">
+              <span class="tk-comment-item-name">${escHtml(c.name||'Anonymous')}</span>
+              <span class="tk-comment-item-time">${formatDate(c.created_at)}</span>
+            </div>
+            <p class="tk-comment-item-text">${escHtml(c.text)}</p>
+          </div>`).join('');
+    return `
+      <div class="tk-comment-thread" id="tk-thread-${domId}">${thread}</div>
+      <div class="tk-comment-form">
+        <textarea id="tk-txt-${domId}" rows="2" placeholder="Add a comment on this action..."></textarea>
+        <div class="tk-comment-form-row">
+          <input type="text" id="tk-name-${domId}" placeholder="Your name (optional)">
+          <button class="tk-comment-post-btn" id="tk-btn-${domId}" data-role="comment-post">Post</button>
+        </div>
+        <div class="tk-comment-status" id="tk-status-msg-${domId}"></div>
+      </div>`;
+  }
+
+  function wireCommentForm(container, trackerKey, phaseKey, item, domId, reopenDomId){
+    container.querySelector('[data-role="comment-post"]').addEventListener('click', async () => {
+      const txt = document.getElementById(`tk-txt-${domId}`);
+      const nameEl = document.getElementById(`tk-name-${domId}`);
+      const btn = document.getElementById(`tk-btn-${domId}`);
+      const status = document.getElementById(`tk-status-msg-${domId}`);
+      const body = txt.value.trim();
+      if(!body){ status.textContent = 'Please write something first.'; status.style.color = '#F67A1C'; return; }
+      btn.disabled = true; status.textContent = 'Posting...'; status.style.color = '#8A9099';
+      try{
+        await pushTrackerEvent(trackerKey, phaseKey, item.id, nameEl.value.trim() || 'Anonymous', { op:'comment', text: body });
+        await reloadTrackers(reopenDomId);
+      }catch(e){
+        status.textContent = 'Failed to post. Please try again.'; status.style.color = '#F67A1C';
+        btn.disabled = false;
+      }
+    });
+  }
+
+  function editWrapHTML(domId, item){
+    return `
+      <div class="tk-edit-wrap" data-role="edit-wrap" id="tk-edit-${domId}">
+        <textarea class="tk-edit-textarea" data-role="edit-textarea">${escHtml(item.action)}</textarea>
+        <div class="tk-edit-actions">
+          <button class="tk-edit-save" data-role="edit-save">Save</button>
+          <button class="tk-edit-cancel" data-role="edit-cancel">Cancel</button>
+        </div>
+      </div>`;
+  }
+
+  function wireEditControls(container, trackerKey, phaseKey, item, domId, actionTextEl, reopenDomId){
+    const editToggle = container.querySelector('[data-role="edit-toggle"]');
+    const editWrap = container.querySelector('[data-role="edit-wrap"]');
+    const textarea = container.querySelector('[data-role="edit-textarea"]');
+    const saveBtn = container.querySelector('[data-role="edit-save"]');
+    const cancelBtn = container.querySelector('[data-role="edit-cancel"]');
+
+    editToggle.addEventListener('click', () => {
+      actionTextEl.classList.add('hidden');
+      editWrap.classList.add('open');
+      textarea.focus();
+      textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      textarea.value = item.action;
+      editWrap.classList.remove('open');
+      actionTextEl.classList.remove('hidden');
+    });
+
+    saveBtn.addEventListener('click', async () => {
+      const newVal = textarea.value.trim();
+      if(!newVal) return;
+      saveBtn.disabled = true; saveBtn.textContent = 'Saving…';
+      try{
+        await pushTrackerEvent(trackerKey, phaseKey, item.id, 'Team', { op:'edit', action: newVal });
+        await reloadTrackers(reopenDomId);
+      }catch(e){
+        alert('Could not save the edit — check your connection and try again.');
+        saveBtn.disabled = false; saveBtn.textContent = 'Save';
+      }
+    });
+  }
+
+  function renderTrackerCard(trackerKey, phaseKey, item){
+    const domId = `m-${trackerKey}-${phaseKey}-${item.id}`;
+    const commentCount = (item.comments || []).length;
+    const card = document.createElement('div');
+    card.className = 'tk-card';
+    card.style.marginBottom = '.85rem';
+    card.innerHTML = `
+      <div class="tk-card-top">
+        <div class="tk-action-wrap">
+          <div class="tk-action" data-role="action-text">${escHtml(item.action)}</div>
+          ${editWrapHTML(domId, item)}
+        </div>
+        <div class="tk-card-controls">
+          <button class="tk-icon-btn" data-role="edit-toggle" title="Edit action">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button class="tk-icon-btn ${commentCount>0?'has-comments':''}" data-role="comment-toggle" title="Comments">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            ${commentCount>0?`<span class="tk-badge">${commentCount}</span>`:''}
+          </button>
+          <button class="tk-icon-btn" data-role="delete" title="Remove">✕</button>
+        </div>
+      </div>
+      <span class="tk-status-label">Status</span>
+      <select class="tk-status-select ${statusClass(item.status)}" data-role="status"></select>
+      <div class="tk-comment-panel" data-role="comment-panel" id="tk-panel-${domId}">
+        ${commentPanelBodyHTML(domId, item)}
+      </div>
+    `;
+
+    const select = card.querySelector('[data-role="status"]');
+    select.innerHTML = STATUS_OPTIONS.map(o => `<option value="${o}" ${o===item.status?'selected':''}>${o}</option>`).join('');
+    select.addEventListener('change', async (e) => {
+      const newStatus = e.target.value;
+      select.className = 'tk-status-select ' + statusClass(newStatus);
+      try{
+        await pushTrackerEvent(trackerKey, phaseKey, item.id, 'Team', { op:'status', status:newStatus });
+      }catch(err){ alert('Could not save status — check your connection.'); }
+      await reloadTrackers();
+    });
+
+    const actionTextEl = card.querySelector('[data-role="action-text"]');
+    wireEditControls(card, trackerKey, phaseKey, item, domId, actionTextEl, domId);
+
+    card.querySelector('[data-role="delete"]').addEventListener('click', async () => {
+      if (!confirm('Remove this action from the tracker? This cannot be undone.')) return;
+      try{
+        await pushTrackerEvent(trackerKey, phaseKey, item.id, 'Team', { op:'delete' });
+        await reloadTrackers();
+      }catch(e){ alert('Could not remove action — check your connection.'); }
+    });
+
+    card.querySelector('[data-role="comment-toggle"]').addEventListener('click', () => {
+      const panel = card.querySelector(`#tk-panel-${domId}`);
+      panel.classList.toggle('open');
+      if (panel.classList.contains('open')) {
+        setTimeout(() => { const t = document.getElementById(`tk-txt-${domId}`); if(t) t.focus(); }, 50);
+      }
+    });
+
+    wireCommentForm(card, trackerKey, phaseKey, item, domId, domId);
+    return card;
+  }
+
+  function renderTrackerTable(trackerKey, phaseKey, items){
+    const table = document.createElement('table');
+    table.className = 'tk-table';
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th class="tk-th-center">Status</th>
+          <th class="tk-th-center">Edit</th>
+          <th class="tk-th-center">Comments</th>
+          <th class="tk-th-center"></th>
+        </tr>
+      </thead>
+      <tbody></tbody>`;
+    const tbody = table.querySelector('tbody');
+
+    items.forEach(item => {
+      const domId = `t-${trackerKey}-${phaseKey}-${item.id}`;
+      const commentCount = (item.comments || []).length;
+
+      const row = document.createElement('tr');
+      row.className = 'tk-row';
+      row.innerHTML = `
+        <td class="tk-td-action">
+          <div class="tk-action" data-role="action-text">${escHtml(item.action)}</div>
+          ${editWrapHTML(domId, item)}
+        </td>
+        <td class="tk-td-status"><select class="tk-status-select ${statusClass(item.status)}" data-role="status"></select></td>
+        <td class="tk-td-edit"><button class="tk-icon-btn" data-role="edit-toggle" title="Edit action">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </button></td>
+        <td class="tk-td-comments">
+          <button class="tk-icon-btn ${commentCount>0?'has-comments':''}" data-role="comment-toggle" title="Comments">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            ${commentCount>0?`<span class="tk-badge">${commentCount}</span>`:''}
+          </button>
+        </td>
+        <td class="tk-td-delete"><button class="tk-icon-btn" data-role="delete" title="Remove">✕</button></td>`;
+
+      const commentRow = document.createElement('tr');
+      commentRow.className = 'tk-comment-row';
+      commentRow.id = `tk-panel-${domId}`;
+      commentRow.innerHTML = `<td colspan="5"><div class="tk-comment-row-inner">${commentPanelBodyHTML(domId, item)}</div></td>`;
+
+      const actionTextEl = row.querySelector('[data-role="action-text"]');
+      wireEditControls(row, trackerKey, phaseKey, item, domId, actionTextEl, domId);
+
+      const select = row.querySelector('[data-role="status"]');
+      select.innerHTML = STATUS_OPTIONS.map(o => `<option value="${o}" ${o===item.status?'selected':''}>${o}</option>`).join('');
+      select.addEventListener('change', async (e) => {
+        const newStatus = e.target.value;
+        select.className = 'tk-status-select ' + statusClass(newStatus);
+        try{
+          await pushTrackerEvent(trackerKey, phaseKey, item.id, 'Team', { op:'status', status:newStatus });
+        }catch(err){ alert('Could not save status — check your connection.'); }
+        await reloadTrackers();
+      });
+
+      row.querySelector('[data-role="delete"]').addEventListener('click', async () => {
+        if (!confirm('Remove this action from the tracker? This cannot be undone.')) return;
+        try{
+          await pushTrackerEvent(trackerKey, phaseKey, item.id, 'Team', { op:'delete' });
+          await reloadTrackers();
+        }catch(e){ alert('Could not remove action — check your connection.'); }
+      });
+
+      row.querySelector('[data-role="comment-toggle"]').addEventListener('click', () => {
+        commentRow.classList.toggle('open');
+        if (commentRow.classList.contains('open')) {
+          setTimeout(() => { const t = document.getElementById(`tk-txt-${domId}`); if(t) t.focus(); }, 50);
+        }
+      });
+
+      wireCommentForm(commentRow, trackerKey, phaseKey, item, domId, domId);
+
+      tbody.appendChild(row);
+      tbody.appendChild(commentRow);
+    });
+
+    return table;
+  }
+
+  async function reloadTrackers(reopenDomId){
+    const events = await fetchTrackerEvents();
+    if (events !== null) ALL_TRACKER_EVENTS = events;
+    renderTracker('roadmapRoot', 'roadmap', ROADMAP_PHASES);
+    if (reopenDomId){
+      const panel = document.getElementById('tk-panel-' + reopenDomId);
+      if (panel) panel.classList.add('open');
+    }
+  }
+
+  initComments();
+  reloadTrackers();
+</script>
+</body>
+</html>
